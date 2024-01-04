@@ -423,3 +423,11 @@ body {
         font-size: 2rem;
     }
 }
+
+/* errormessage */
+.error-message {
+    color: red;
+    font-weight: 600;
+    font-size: larger;
+    margin-top: 5px;
+}

@@ -63,20 +63,20 @@
           <header>
             <h4>Select File here</h4>
           </header>
-          <p> Files Supported: PDF, TEXT, DOC , DOCX </p>
-          <input type="file" hidden accept=".doc,.docx,.pdf" id="fileID" style="display:none;" onchange="handleFileUpload(this.files)">
+          <p> Files Supported: PDF</p>
+          <input type="file" hidden accept=".pdf" id="fileID" style="display:none;" onchange="handleFileUpload(this.files)">
           <button class="btn" onclick="buttonClick()">Choose File</button>
         </div>
     
       </div>
-      <form action="#" method="post" id="urlForm">
+      <form action="chat.html" method="get" id="urlForm">
         <div>
           <label for="url">Enter URL</label>
-          <input type="url" name="url" id="url" value="" />
+          <input type="url" name="url" id="url" value="" required/>
         </div>
       
         <div>
-          <input class="btn" type="submit" value="Start Chat" />
+          <input class="btn" type="submit" value="Start Chat" onclick="startChat()" />
         </div>
       </form> 
     </div>

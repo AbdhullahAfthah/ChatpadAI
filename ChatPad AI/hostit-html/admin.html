@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Admin Dashboard</title>
+
+
+  <!-- bootstrap core css -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles-->
+  <link href="css/admin.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
+
+</head>
+
+<body>
+
+
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>ChatPad AI</span>
+          </a>
+          <div id="avatar-container">
+            <div id="avatar" onclick="toggleLogoutMenu()">
+              <!-- You can replace the src attribute with the actual path to your avatar image -->
+              <img src="images/client.jpg" alt="Avatar">
+            </div>
+            <div id="logout-menu">
+              <a href="#">Logout</a>
+              <!-- Add more menu items as needed -->
+            </div>
+          </div>
+      </div>
+    
+    </header>
+    <div class="upload_table">
+        <h2>User info</h2>
+  
+  
+  
+          <table id="pdfTable">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Uploaded PDFs will appear here -->
+            </tbody>
+          </table>
+  
+      </div>
+    <script src="js/admin.js"></script>
+</body>

@@ -77,23 +77,24 @@
                     <div class="form sign-up">
                         <div class="input-group">
                             <i class='bx bxs-user'></i>
-                            <input type="text" placeholder="Username">
+                            <input id="username" type="text" placeholder="Username">
                         </div>
                         <div class="input-group">
                             <i class='bx bx-mail-send'></i>
-                            <input type="email" placeholder="Email">
+                            <input id="email" type="email" placeholder="Email">
                         </div>
                         <div class="input-group">
                             <i class='bx bxs-lock-alt'></i>
-                            <input type="password" placeholder="Password">
+                            <input id="password" type="password" placeholder="Password">
                         </div>
                         <div class="input-group">
                             <i class='bx bxs-lock-alt'></i>
-                            <input type="password" placeholder="Confirm password">
+                            <input id="confirmPassword" type="password" placeholder="Confirm password">
                         </div>
-                        <button>
+                        <button onclick="signup()">
                             Sign up
                         </button>
+                        <p class="error-message" id="errorMessage"></p>
                         <p>
                             <span>
                                 Already have an account?

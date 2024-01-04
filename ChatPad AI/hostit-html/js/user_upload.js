@@ -21,18 +21,15 @@ document.addEventListener("click", function (event) {
   }
 });
 
-
-
-
-
-
-
 function buttonClick() {
   document.getElementById("fileID").click();
 }
 
 function handleFileUpload(files) {
   const tableBody = $("#pdfTable tbody");
+
+  const fileName = files[0].name;
+  window.location.href = `chat.html?file=${encodeURIComponent(fileName)}`;
 
   for (const file of files) {
     const row = $("<tr>");
@@ -44,14 +41,19 @@ function handleFileUpload(files) {
   }
 }
 
-$(function(){
+$(function () {
   // URL form submission handling
-  $("#urlForm").submit(function(e) {
+  $("#urlForm").submit(function (e) {
     e.preventDefault();
     const url = $("#url").val();
+    // Save the URL to local storage
+    localStorage.setItem("chatUrl", url);
     addToTable(url, "N/A");
     // Clear the input field after adding to the table
     $("#url").val("");
+
+    // Redirect to chat.html with the specified URL as a query parameter
+    window.location.href = `chat.html?url=${encodeURIComponent(url)}`;
   });
 
   // Function to add PDF or URL to the table
@@ -61,15 +63,16 @@ $(function(){
     const nameCell = $("<td>").text(name);
     const sizeCell = $("<td>").text(size);
     const optionsCell = $("<td>").append(createOptionsMenu());
-    row.append(nameCell, sizeCell,optionsCell);
+    row.append(nameCell, sizeCell, optionsCell);
     tableBody.append(row);
   }
 });
-
- // Function to create the options menu
- function createOptionsMenu() {
+// Function to create the options menu
+function createOptionsMenu() {
   const optionsMenu = $("<div class='options-menu'>");
-  const optionsBtn = $("<div class='options-btn'>").html("<span>&#8942;</span>");
+  const optionsBtn = $("<div class='options-btn'>").html(
+    "<span>&#8942;</span>"
+  );
 
   const optionsContent = $("<div class='options-content'>");
   const openToChat = $("<a href='#'>").text("Open to Chat");
@@ -81,13 +84,13 @@ $(function(){
   return optionsMenu;
 }
 // Show/hide options menu on button click
-$(document).on("click", ".options-btn", function() {
+$(document).on("click", ".options-btn", function () {
   const optionsContent = $(this).siblings(".options-content");
   optionsContent.toggle();
 });
 
 // Close options menu when clicking outside
-$(document).on("click", function(event) {
+$(document).on("click", function (event) {
   if (!$(event.target).closest(".options-menu").length) {
     $(".options-content").hide();
   }

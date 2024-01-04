@@ -4,23 +4,103 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="Sajjad Hussain">
-  <title>Chat GPT Kit</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta name="author" content="ChatPad AI">
+  <title>ChatPad AI</title>
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
-  <link rel="shortcut icon" href="images/chatgpt-favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="css/chat.css" />
-</head>
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <link rel="stylesheet" href="css/chat.css" />
+  </head>
 
 <body>
+   <!-- header section strats -->
+   <header class="header_section">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" href="index.html">
+          <span>ChatPad AI</span>
+        </a>
+        <div id="avatar-container">
+          <div id="avatar" onclick="toggleLogoutMenu()">
+            <!-- You can replace the src attribute with the actual path to your avatar image -->
+            <img src="images/client.jpg" alt="Avatar">
+          </div>
+          <div id="logout-menu">
+            <a href="#">Logout</a>
+            <!-- Add more menu items as needed -->
+          </div>
+        </div>
+    </div>
+  
+  </header>
 
   <!-- START MAIN CONTAINER -->
-  <div class="container-fluid">
+
     <div class="row">
 
       <!-- START SIDENAV -->
-      <div class="side-nav col-lg-6 col-md-9">
-        <iframe src="pdfs/Detailed Syllabi BE(CS) batch 2018 onwards(1) (1).pdf" width="100%" height="600px"></iframe>
+      <div class="side-nav">
+        <iframe id="pdfViewer" width="100%" height="550px"></iframe>
+      </div>
+
+      <section class="msger">
+        <header class="msger-header">
+          <div id="optioncontainer">
+            <div class="msger-header-options" id="option" onclick="toggleExitChatMenu()">
+              <span><i class="fas fa-cog"></i></span>
+            </div>
+            <div id="exitChatMenu">
+              <a href="#">Exit Chat</a>
+              <!-- Add more menu items as needed -->
+            </div>
+          </div>
+        </header>
+      
+        <main class="msger-chat">
+          <div class="msg left-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">BOT</div>
+                <div class="msg-info-time">12:45</div>
+              </div>
+      
+              <div class="msg-text">
+                Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
+              </div>
+            </div>
+          </div>
+      
+          <div class="msg right-msg">
+            <div
+             class="msg-img"
+             style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
+            ></div>
+      
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">Sajad</div>
+                <div class="msg-info-time">12:46</div>
+              </div>
+      
+              <div class="msg-text">
+                You can change your name in JS section!
+              </div>
+            </div>
+          </div>
+        </main>
+      
+        <form class="msger-inputarea">
+          <input type="text" class="msger-input" placeholder="Enter your message...">
+          <button type="submit" class="msger-send-btn">Send</button>
+        </form>
+      </section>
+    </div>
+
 
         <!-- START NEW CHAT BUTTON
         <div class="row p-2">
@@ -44,247 +124,14 @@
         </div> -->
 
     
-
-       
-        <hr />
-
-        <div class="row">
-          <div class="col-12">
-            <ul class="list-unstyled">
-
-              <!-- START SETTINGS -->
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                  <i class="fas fa-cog"></i> Settings
-                </a>
-              </li>
-
-              <!-- START GET HELP -->
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                  <i class="fas fa-question-circle"></i> Get Help
-                </a>
-              </li>
-
-              <!-- START LOG OUT -->
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">
-                  <i class="fas fa-sign-out-alt"></i> Log Out
-                </a>
-              </li>
-
-            </ul>
-          </div>
-        </div>
-      </div>
-
       <!-- START CONTENT -->
-      <div class="content  p-0 pt-2 col-lg-6 col-md-9">
-        <div class="chat-content-area">
+    
 
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
 
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
+      <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+      <script src="js/chat.js"></script>
 
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
 
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
-
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
-
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
-
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
-
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
-
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
-
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
-
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
-
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
-
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
-
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
-
-          <!-- START USER CHAT -->
-          <div class="row user-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/user-icon.png" />
-            </div>
-            <div class="chat-txt">who are you?</div>
-          </div>
-
-          <!-- START GPT CHAT -->
-          <div class="row gpt-chat-box">
-            <div class="chat-icon">
-              <img class="chatgpt-icon" src="images/chatgpt-icon.png" />
-            </div>
-            <div class="chat-txt">
-              I am ChatGPT, a large language model developed by OpenAI. I am
-              an artificial intelligence designed to process and generate
-              human-like text based on the input provided to me. I am here to
-              assist you with any questions or tasks you may have to the best
-              of my abilities!
-            </div>
-          </div>
-        </div>
-
-        <!-- START CHAT INPUTS -->
-        <div class="chat-input-area overflow-hidden">
-          <div class="row">
-            <div class="col-12 chat-inputs-area-inner">
-              <div class="row chat-inputs-container d-flex align-items-center">
-                <textarea name="" id="" class="col-11" placeholder="Send a message"></textarea>
-                <span class="col-1"><i class="fa fa-paper-plane" aria-hidden="true"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- START FOOTER -->
-  <footer class="d-flex align-items-center justify-content-center position-relative bottom-0">
-    <div class="text-center">© 2020 Copyright Sajjad Hussain</div>
-  </footer>
-
-  <!-- START EXTERNAL JS RESOURCES -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/5.0.0-beta.5/index.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/material-ui/5.0.0-beta.5/index.js"></script>
 
 
 </body>
