@@ -9,7 +9,7 @@
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" />
   <link rel="icon" href="images/fevicon.png" type="image/gif" />
-    <link rel="stylesheet" href="css/chat.css" />
+  <link rel="stylesheet" href="css/chat.css" />
   </head>
 
 <body>
@@ -23,7 +23,7 @@
         <div id="avatar-container">
           <div id="avatar" onclick="toggleLogoutMenu()">
             <!-- You can replace the src attribute with the actual path to your avatar image -->
-            <img src="images/client.jpg" alt="Avatar">
+            <img src="images/userlogo2.png" alt="Avatar">
           </div>
           <div id="logout-menu">
             <a href="#">Logout</a>
@@ -40,7 +40,7 @@
 
       <!-- START SIDENAV -->
       <div class="side-nav">
-        <iframe id="pdfViewer" width="100%" height="550px"></iframe>
+        <iframe id="pdfViewer" width="100%" height="580px"></iframe>
       </div>
 
       <section class="msger">
@@ -50,7 +50,7 @@
               <span><i class="fas fa-cog"></i></span>
             </div>
             <div id="exitChatMenu">
-              <a href="#">Exit Chat</a>
+              <a href="user_upload.html">Exit Chat</a>
               <!-- Add more menu items as needed -->
             </div>
           </div>
@@ -60,43 +60,27 @@
           <div class="msg left-msg">
             <div
              class="msg-img"
-             style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"
+             style="background-image: url(images/chaticon.png)"
             ></div>
       
             <div class="msg-bubble">
               <div class="msg-info">
-                <div class="msg-info-name">BOT</div>
-                <div class="msg-info-time">12:45</div>
+                <div class="msg-info-name">ChatPad AI</div>
+         
               </div>
       
               <div class="msg-text">
-                Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
+                Hi, welcome to ChatPad AI! Go ahead and ask me. 😄
               </div>
             </div>
           </div>
       
-          <div class="msg right-msg">
-            <div
-             class="msg-img"
-             style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"
-            ></div>
-      
-            <div class="msg-bubble">
-              <div class="msg-info">
-                <div class="msg-info-name">Sajad</div>
-                <div class="msg-info-time">12:46</div>
-              </div>
-      
-              <div class="msg-text">
-                You can change your name in JS section!
-              </div>
-            </div>
-          </div>
+         
         </main>
       
         <form class="msger-inputarea">
-          <input type="text" class="msger-input" placeholder="Enter your message...">
-          <button type="submit" class="msger-send-btn">Send</button>
+          <input id="messageInput" type="text" class="msger-input" placeholder="Enter your message...">
+          <button id="send" type="submit" class="msger-send-btn">Send</button>
         </form>
       </section>
     </div>
