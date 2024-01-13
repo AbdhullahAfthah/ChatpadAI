@@ -8,6 +8,32 @@ function toggleLogoutMenu() {
   }
 }
 
+// Assuming you have the user's token stored in a variable named 'userToken'
+
+// Function to handle logout
+function logout() {
+  // Clear or invalidate the stored token
+  clearToken();
+
+  // Optionally, redirect to the login page or perform other logout-related actions
+  window.location.href = "login.html"; // Update the URL
+}
+
+// Function to clear or invalidate the stored token
+function clearToken() {
+  // Clear the token securely (e.g., remove from an HTTP-only cookie or local storage)
+  // For example, using localStorage:
+  localStorage.removeItem("accessToken");
+}
+
+// Attach the logout function to the "Logout" link
+$("#logout-menu a").on("click", function (event) {
+  event.preventDefault();
+  logout();
+});
+
+
+
 // Close the logout menu when clicking outside of it
 document.addEventListener("click", function (event) {
   var logoutMenu = document.getElementById("logout-menu");
