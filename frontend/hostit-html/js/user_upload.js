@@ -32,8 +32,6 @@ $("#logout-menu a").on("click", function (event) {
   logout();
 });
 
-
-
 // Close the logout menu when clicking outside of it
 document.addEventListener("click", function (event) {
   var logoutMenu = document.getElementById("logout-menu");
@@ -55,7 +53,6 @@ async function handleFileUpload(files) {
   const tableBody = $("#pdfTable tbody");
 
   const fileName = files[0].name;
-  window.location.href = `chat.html?file=${encodeURIComponent(fileName)}`;
 
   for (const file of files) {
     const row = $("<tr>");
@@ -70,35 +67,40 @@ async function handleFileUpload(files) {
     const file = files[0];
 
     // Assuming your API endpoint is http://your-api-endpoint/upload-pdf
-    const apiUrl = 'http://localhost:8000/upload-pdf';
+    const apiUrl = "http://localhost:8000/upload-pdf";
 
     // Retrieve the stored token
     const userToken = retrieveToken();
 
     // Create FormData and append the file to it
     const formData = new FormData();
-    formData.append('pdfFile', file);
+    formData.append("file", file);
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${userToken}`, // Include the stored token in the headers
+          Authorization: `Bearer ${userToken}`, // Include the stored token in the headers
+          // "Content-Type": "multipart/form-data", // Set the Content-Type header
         },
+
         body: formData,
       });
+      // console.log(formData);
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log('File uploaded successfully to the API');
-        console.log('File path:', responseData.filePath);
+        console.log("File uploaded successfully to the API");
+        console.log("File path:", responseData.filePath);
+        window.location.href = `chat.html?file=${encodeURIComponent(fileName)}`;
+
         // Handle success (e.g., show a success message to the user)
       } else {
-        console.error('Failed to upload file to the API');
+        console.error("Failed to upload file to the API");
         // Handle failure (e.g., show an error message to the user)
       }
     } catch (error) {
-      console.error('Error during file upload to the API:', error);
+      console.error("Error during file upload to the API:", error);
       // Handle error (e.g., show an error message to the user)
     }
   }
