@@ -8,6 +8,11 @@ from langchain.llms import OpenAI
 from langchain_community.document_loaders import WebBaseLoader
 import os
 
+from fastapi import FastAPI,File, HTTPException, UploadFile
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
+
 
 
 os.environ["OPENAI_API_KEY"] = "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"
@@ -19,8 +24,8 @@ def get_web_text(url):
     web_page = loader.load()       
     content = web_page[0].page_content
     print("Web page content loaded successfully.")
-    print(type(content))
-    print(content)
+    # print(type(content))
+    # print(content)
     return content
 
 
@@ -59,15 +64,39 @@ def get_conversation_chain(vectorstore):
     return conversation_chain
 
 
-def main():
 
-    url = input("Enter the website url : ")
-    
-     # get url content
-    content = get_web_text(url)
+app = FastAPI()
+chain = None  # Global variable to store the conversation chain
+
+
+# Allow all origins, credentials, methods, and headers for testing purposes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ... your routes and other code ...
+
+
+@app.post("/process_url")
+async def process_pdf(data: dict):
+    global chain  # Access the global variable
+    print(data)
+    print(type(data))
+    url = data.get("url","")
+
+    print(url)
+    print(type(url))
+
+
+    # get pdf text
+    raw_text = get_web_text(url)
 
     # get the text chunks
-    text_chunks = get_text_chunks(content)
+    text_chunks = get_text_chunks(raw_text)
 
     # create vector store
     vectorstore = get_vectorstore(text_chunks)
@@ -75,14 +104,65 @@ def main():
     # create conversation chain
     chain = get_conversation_chain(vectorstore)
 
-
-    #Check the working
-    while True:
-        query = input("Enter your query: ")
-
-        output = chain.run(query)
-        print(output)
+    # Return the result or any other response
+    return {"message": "URL processing started. Waiting for your query"}
 
 
-if __name__ == '__main__':
-    main()
+
+@app.post("/url_query")
+async def url_query(request: dict):
+    # print(type(request))
+    # print (request)
+
+    
+
+    # print(type(query))
+    # print (query)
+
+    global chain  # Access the global variable
+
+
+    if chain is None:
+        raise HTTPException(status_code=400, detail="Conversation chain not initialized")
+
+    
+    query = request.get("query", "")
+
+     
+    # Process the query using the existing chain
+    output = chain.run(query)
+    # print (output)
+
+    # Return the output or any other response
+    return {"output": output}
+
+
+
+
+# def main():
+
+#     url = input("Enter the website url : ")
+    
+#      # get url content
+#     content = get_web_text(url)
+
+#     # get the text chunks
+#     text_chunks = get_text_chunks(content)
+
+#     # create vector store
+#     vectorstore = get_vectorstore(text_chunks)
+
+#     # create conversation chain
+#     chain = get_conversation_chain(vectorstore)
+
+
+#     #Check the working
+#     while True:
+#         query = input("Enter your query: ")
+
+#         output = chain.run(query)
+#         print(output)
+
+
+# if __name__ == '__main__':
+#     main()

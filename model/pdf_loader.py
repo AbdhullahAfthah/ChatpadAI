@@ -10,9 +10,9 @@ import os
 
 from fastapi import FastAPI,File, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 
-import logging
 
 
 os.environ["OPENAI_API_KEY"] = "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"
@@ -68,18 +68,40 @@ app = FastAPI()
 chain = None  # Global variable to store the conversation chain
 
 
-@app.post("/process_pdf")
-async def process_pdf(pdf_path: str):
-    global chain  # Access the global variable
+# Allow all origins, credentials, methods, and headers for testing purposes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+# ... your routes and other code ...
+
+
+
+# class requestModel(BaseModel):
+#     query: str
+
+
+
+
+@app.post("/process_pdf")
+async def process_pdf(path: dict):
+    global chain  # Access the global variable
+    print(path)
+    print(type(path))
+    pdf_path = path.get("path","")
+
+    print(pdf_path)
+    print(type(pdf_path))
 
     # Validate if the provided path exists
-    pdf_path = Path(pdf_path)
-    # if not pdf_path.is_file():
-    #     return JSONResponse(content={"error": "Invalid PDF file path"}, status_code=400)
+    # pdf_path = Path(pdf_path)
+    if not pdf_path.is_file():
+        return JSONResponse(content={"error": "Invalid PDF file path"}, status_code=400)
 
-    # Call your processing function here using the pdf_path
-    # For example:
     # get pdf text
     raw_text = get_pdf_text(pdf_path)
 
@@ -97,9 +119,15 @@ async def process_pdf(pdf_path: str):
 
 
 
-@app.post("/process_query")
-async def process_query(query_data: dict):
-    # print (query_data)
+@app.post("/pdf_query")
+async def pdf_query(request: dict):
+    # print(type(request))
+    # print (request)
+
+    
+
+    # print(type(query))
+    # print (query)
 
     global chain  # Access the global variable
 
@@ -107,9 +135,10 @@ async def process_query(query_data: dict):
     if chain is None:
         raise HTTPException(status_code=400, detail="Conversation chain not initialized")
 
+    
+    query = request.get("query", "")
 
-    query = query_data.get("query", "")
-
+     
     # Process the query using the existing chain
     output = chain.run(query)
     # print (output)
@@ -119,42 +148,3 @@ async def process_query(query_data: dict):
 
 
 
-# #Check the working
-# while True:
-#     query = input("Enter your query: ")
-
-#     output = chain.run(query)
-#     print(output)
-
-
-
-
-
-
-
-
-
-# def main():
-#      # get pdf text
-#     raw_text = get_pdf_text(pdf_file)
-
-#     # get the text chunks
-#     text_chunks = get_text_chunks(raw_text)
-
-#     # create vector store
-#     vectorstore = get_vectorstore(text_chunks)
-
-#     # create conversation chain
-#     chain = get_conversation_chain(vectorstore)
-
-
-#     #Check the working
-#     while True:
-#         query = input("Enter your query: ")
-
-#         output = chain.run(query)
-#         print(output)
-
-
-# if __name__ == '__main__':
-#     main()
