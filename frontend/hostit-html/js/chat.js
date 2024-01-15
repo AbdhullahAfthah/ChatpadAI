@@ -104,13 +104,13 @@ const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 
-const BOT_MSGS = [
-  "Hi, how are you?",
-  "Ohh... I can't understand what you trying to say. Sorry!",
-  "I like to play games... But I don't know how to play!",
-  "Sorry if my answers are not relevant. :))",
-  "I feel sleepy! :(",
-];
+// const BOT_MSGS = [
+//   "Hi, how are you?",
+//   "Ohh... I can't understand what you trying to say. Sorry!",
+//   "I like to play games... But I don't know how to play!",
+//   "Sorry if my answers are not relevant. :))",
+//   "I feel sleepy! :(",
+// ];
 
 // Icons made by Freepik from www.flaticon.com
 const BOT_IMG = "images/chaticon.png";
