@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "Enter you OpenAI API key here"
 # pdf_file = r"./model/CIS-OBE-handout.pdf"
 
 def get_pdf_text(pdf_doc):
@@ -48,7 +48,7 @@ def get_vectorstore(text_chunks):
 
 
 def get_conversation_chain(vectorstore):
-    llm = OpenAI()
+    llm = OpenAI(model="gpt-3.5-turbo-instruct")
     # llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.5, "max_length":512})
 
     memory = ConversationBufferMemory(
@@ -99,8 +99,8 @@ async def process_pdf(path: dict):
 
     # Validate if the provided path exists
     # pdf_path = Path(pdf_path)
-    if not pdf_path.is_file():
-        return JSONResponse(content={"error": "Invalid PDF file path"}, status_code=400)
+    # if not pdf_path.is_file():
+    #     return JSONResponse(content={"error": "Invalid PDF file path"}, status_code=400)
 
     # get pdf text
     raw_text = get_pdf_text(pdf_path)
@@ -115,7 +115,7 @@ async def process_pdf(path: dict):
     chain = get_conversation_chain(vectorstore)
 
     # Return the result or any other response
-    return {"message": "PDF processing started. Waiting for your query"}
+    return JSONResponse(content={"message": "PDF processing started. Waiting for your query"}, status_code=200)
 
 
 
@@ -126,8 +126,7 @@ async def pdf_query(request: dict):
 
     
 
-    # print(type(query))
-    # print (query)
+    
 
     global chain  # Access the global variable
 
@@ -138,10 +137,12 @@ async def pdf_query(request: dict):
     
     query = request.get("query", "")
 
-     
+    print(type(query))
+    print (query)
+
     # Process the query using the existing chain
     output = chain.run(query)
-    # print (output)
+    print (output)
 
     # Return the output or any other response
     return {"output": output}

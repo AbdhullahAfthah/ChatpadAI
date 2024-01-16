@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "Enter you OpenAI API key here"
 
 
 
@@ -50,7 +50,7 @@ def get_vectorstore(text_chunks):
 
 
 def get_conversation_chain(vectorstore):
-    llm = OpenAI()
+    llm = OpenAI(model="gpt-3.5-turbo-instruct")
     # llm = HuggingFaceHub(repo_id="google/flan-t5-xxl", model_kwargs={"temperature":0.5, "max_length":512})
 
     memory = ConversationBufferMemory(
@@ -138,31 +138,3 @@ async def url_query(request: dict):
 
 
 
-
-# def main():
-
-#     url = input("Enter the website url : ")
-    
-#      # get url content
-#     content = get_web_text(url)
-
-#     # get the text chunks
-#     text_chunks = get_text_chunks(content)
-
-#     # create vector store
-#     vectorstore = get_vectorstore(text_chunks)
-
-#     # create conversation chain
-#     chain = get_conversation_chain(vectorstore)
-
-
-#     #Check the working
-#     while True:
-#         query = input("Enter your query: ")
-
-#         output = chain.run(query)
-#         print(output)
-
-
-# if __name__ == '__main__':
-#     main()
