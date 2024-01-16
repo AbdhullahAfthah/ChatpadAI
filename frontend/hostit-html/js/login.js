@@ -43,7 +43,7 @@ async function signup() {
   }
 
   // Your backend API endpoint (update the URL accordingly)
-  const apiUrl = "http://localhost:8000/create_user";
+  const apiUrl = "http://localhost:8002/create_user";
 
   // Data to be sent to the server
   const data = {
@@ -107,7 +107,7 @@ async function signin() {
   }
 
   // Your backend API endpoint for signin (update the URL accordingly)
-  const apiUrl = "http://localhost:8000/token"; // Update the URL
+  const apiUrl = "http://localhost:8002/token"; // Update the URL
 
   // Data to be sent to the server
   const data = new URLSearchParams();

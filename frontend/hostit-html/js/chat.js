@@ -45,14 +45,13 @@ $("#logout-menu a").on("click", function (event) {
 
 // Retrieve the stored token
 const userToken = retrieveToken();
-console.log(retrieveToken)
+console.log(retrieveToken);
 // Function to retrieve the stored token
 function retrieveToken() {
   // Retrieve the token securely (e.g., from an HTTP-only cookie or local storage)
   // For example, using localStorage:
   return localStorage.getItem("accessToken");
 }
-
 
 // Function to toggle the visibility of the exit chat menu
 function toggleExitChatMenu() {
@@ -85,20 +84,15 @@ const url = urlParams.get("url");
 // Specify the folder where the PDFs are stored
 const pdfFolder = "pdfs";
 // Retrieve the URL from localStorage
-
-// Set the src attribute of the iframe based on the available data
 if (fileName) {
   // Handle the case where a file is specified in the query parameter
-  document.getElementById("pdfViewer").src = `${pdfFolder}/${encodeURIComponent(
-    fileName
-  )}`;
+  document.getElementById(
+    "pdfViewer"
+  ).src = `${pdfFolder}/${encodeURIComponent(fileName)}`
 } else if (url) {
   // Handle the case where a URL is stored in localStorage
-  document.getElementById("pdfViewer").src = url;
-} else {
-  // Handle the case where neither a file nor a URL is specified
-  console.error("No file or URL specified.");
-}
+  document.getElementById("pdfViewer").src = url;}
+// Set the src attribute of the iframe based on the available data
 
 const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
@@ -150,12 +144,11 @@ function appendMessage(name, img, side, text) {
 }
 
 function botResponse(data) {
-  const msgText = "response";
-  const delay = msgText.split(" ").length * 100;
+  const msgText = JSON.stringify(data.output)
+    .trim()
+    .replace(/^["']|["']$/g, "");
 
-  setTimeout(() => {
-    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-  }, delay);
+  appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
 }
 
 // Utils
@@ -176,12 +169,32 @@ function random(min, max) {
 
 // Function to send a message to the server
 function sendMessage(message) {
-  fetch("http://127.0.0.1:8000/usermsg", {
+  fetch("http://127.0.0.1:8001/pdf_query", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ message: message }),
+    body: JSON.stringify({ query: message }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response data here
+      console.log(data);
+      botResponse(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+// Function to send a message to the server
+function sendurlMessage(message) {
+  fetch("http://127.0.0.1:8000/url_query", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: message }),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -197,5 +210,19 @@ function sendMessage(message) {
 // Assuming you have a form with an input field with id 'messageInput' and a 'send' button
 document.getElementById("send").addEventListener("click", function () {
   var message = document.getElementById("messageInput").value;
-  sendMessage(message);
+  if (fileName) {
+    // Handle the case where a file is specified in the query parameter
+    // document.getElementById(
+    //   "pdfViewer"
+    // ).src = `${pdfFolder}/${encodeURIComponent(fileName)}`
+    console.log(fileName)
+    sendMessage(message);
+  } else if (url) {
+    // Handle the case where a URL is stored in localStorage
+    // document.getElementById("pdfViewer").src = url;
+    sendurlMessage(message);
+  } else {
+    // Handle the case where neither a file nor a URL is specified
+    console.error("No file or URL specified.");
+  }
 });
