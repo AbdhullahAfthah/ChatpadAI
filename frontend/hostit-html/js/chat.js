@@ -21,6 +21,38 @@ document.addEventListener("click", function (event) {
   }
 });
 
+// Function to handle logout
+function logout() {
+  // Clear or invalidate the stored token
+  clearToken();
+
+  // Optionally, redirect to the login page or perform other logout-related actions
+  window.location.href = "login.html"; // Update the URL
+}
+
+// Function to clear or invalidate the stored token
+function clearToken() {
+  // Clear the token securely (e.g., remove from an HTTP-only cookie or local storage)
+  // For example, using localStorage:
+  localStorage.removeItem("accessToken");
+}
+
+// Attach the logout function to the "Logout" link
+$("#logout-menu a").on("click", function (event) {
+  event.preventDefault();
+  logout();
+});
+
+// Retrieve the stored token
+const userToken = retrieveToken();
+console.log(retrieveToken);
+// Function to retrieve the stored token
+function retrieveToken() {
+  // Retrieve the token securely (e.g., from an HTTP-only cookie or local storage)
+  // For example, using localStorage:
+  return localStorage.getItem("accessToken");
+}
+
 // Function to toggle the visibility of the exit chat menu
 function toggleExitChatMenu() {
   var exitChatMenu = document.getElementById("exitChatMenu");
@@ -46,36 +78,33 @@ document.addEventListener("click", function (event) {
 
 // Get the file name from the query parameter
 const urlParams = new URLSearchParams(window.location.search);
-const fileName = urlParams.get('file');
-const url = urlParams.get('url');
+const fileName = urlParams.get("file");
+const url = urlParams.get("url");
 
 // Specify the folder where the PDFs are stored
-const pdfFolder = 'pdfs';
+const pdfFolder = "pdfs";
 // Retrieve the URL from localStorage
-
-// Set the src attribute of the iframe based on the available data
 if (fileName) {
   // Handle the case where a file is specified in the query parameter
-  document.getElementById('pdfViewer').src = `${pdfFolder}/${encodeURIComponent(fileName)}`;
+  document.getElementById(
+    "pdfViewer"
+  ).src = `${pdfFolder}/${encodeURIComponent(fileName)}`
 } else if (url) {
   // Handle the case where a URL is stored in localStorage
-  document.getElementById('pdfViewer').src = url;
-} else {
-  // Handle the case where neither a file nor a URL is specified
-  console.error('No file or URL specified.');
-}
+  document.getElementById("pdfViewer").src = url;}
+// Set the src attribute of the iframe based on the available data
 
 const msgerForm = get(".msger-inputarea");
 const msgerInput = get(".msger-input");
 const msgerChat = get(".msger-chat");
 
-const BOT_MSGS = [
-"Hi, how are you?",
-"Ohh... I can't understand what you trying to say. Sorry!",
-"I like to play games... But I don't know how to play!",
-"Sorry if my answers are not relevant. :))",
-"I feel sleepy! :("];
-
+// const BOT_MSGS = [
+//   "Hi, how are you?",
+//   "Ohh... I can't understand what you trying to say. Sorry!",
+//   "I like to play games... But I don't know how to play!",
+//   "Sorry if my answers are not relevant. :))",
+//   "I feel sleepy! :(",
+// ];
 
 // Icons made by Freepik from www.flaticon.com
 const BOT_IMG = "images/chaticon.png";
@@ -83,7 +112,7 @@ const PERSON_IMG = "images/userlogo.png";
 const BOT_NAME = "ChatPad AI";
 const PERSON_NAME = "Me";
 
-msgerForm.addEventListener("submit", event => {
+msgerForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const msgText = msgerInput.value;
@@ -91,8 +120,6 @@ msgerForm.addEventListener("submit", event => {
 
   appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText);
   msgerInput.value = "";
-
-  ;
 });
 
 function appendMessage(name, img, side, text) {
@@ -117,13 +144,11 @@ function appendMessage(name, img, side, text) {
 }
 
 function botResponse(data) {
+  const msgText = JSON.stringify(data.output)
+    .trim()
+    .replace(/^["']|["']$/g, "");
 
-  const msgText = "response";
-  const delay = msgText.split(" ").length * 100;
-
-  setTimeout(() => {
-    appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
-  }, delay);
+  appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
 }
 
 // Utils
@@ -142,30 +167,62 @@ function random(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-
-
 // Function to send a message to the server
 function sendMessage(message) {
-  fetch('http://127.0.0.1:8000/usermsg', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({message: message})
+  fetch("http://127.0.0.1:8001/pdf_query", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: message }),
   })
-  .then(response => response.json())
-  .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       // Handle the response data here
       console.log(data);
       botResponse(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+// Function to send a message to the server
+function sendurlMessage(message) {
+  fetch("http://127.0.0.1:8000/url_query", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: message }),
   })
-  .catch((error) => {
-      console.error('Error:', error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      // Handle the response data here
+      console.log(data);
+      botResponse(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 // Assuming you have a form with an input field with id 'messageInput' and a 'send' button
-document.getElementById('send').addEventListener('click', function() {
-  var message = document.getElementById('messageInput').value;
-  sendMessage(message);
+document.getElementById("send").addEventListener("click", function () {
+  var message = document.getElementById("messageInput").value;
+  if (fileName) {
+    // Handle the case where a file is specified in the query parameter
+    // document.getElementById(
+    //   "pdfViewer"
+    // ).src = `${pdfFolder}/${encodeURIComponent(fileName)}`
+    console.log(fileName)
+    sendMessage(message);
+  } else if (url) {
+    // Handle the case where a URL is stored in localStorage
+    // document.getElementById("pdfViewer").src = url;
+    sendurlMessage(message);
+  } else {
+    // Handle the case where neither a file nor a URL is specified
+    console.error("No file or URL specified.");
+  }
 });
