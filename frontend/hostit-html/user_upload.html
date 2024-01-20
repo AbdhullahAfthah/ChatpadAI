@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>ChatPad AI</title>
+
+
+  <!-- bootstrap core css -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles-->
+  <link href="css/user_upload.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
+
+</head>
+
+<body>
+
+
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>ChatPad AI</span>
+          </a>
+          <div id="avatar-container">
+            <div id="avatar" onclick="toggleLogoutMenu()">
+              <!-- You can replace the src attribute with the actual path to your avatar image -->
+              <img src="images/userlogo2.png" alt="Avatar">
+            </div>
+            <div id="logout-menu">
+              <a href="#">Logout</a>
+              <!-- Add more menu items as needed -->
+            </div>
+          </div>
+      </div>
+    
+    </header>
+
+    <div class="container">
+      <div class="card">
+        <h3>Upload Files</h3>
+        <div class="drop_box">
+          <header>
+            <h4>Select File here</h4>
+          </header>
+          <p> Files Supported: PDF</p>
+          <input type="file" hidden accept=".pdf" id="fileID" style="display:none;" onchange="handleFileUpload(this.files)">
+          <button class="btn" onclick="buttonClick()">Choose File</button>
+        </div>
+    
+      </div>
+      <form action="chat.html" method="get" id="urlForm">
+        <div>
+          <label for="url">Enter URL</label>
+          <input type="url" name="url" id="url" value="" required/>
+        </div>
+      
+        <div>
+          <input class="btn" type="submit" value="Start Chat" onclick="startChat()" />
+        </div>
+      </form> 
+    </div>
+    <div class="upload_table">
+      <h2>Uploaded Files</h2>
+
+
+
+        <table id="pdfTable">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <th>File Size (KB)</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Uploaded PDFs will appear here -->
+          </tbody>
+        </table>
+
+    </div>
+
+
+
+
+
+
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="js/user_upload.js"></script>
+    
+
+</body>
+        

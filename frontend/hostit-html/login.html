@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <link rel="icon" href="images/fevicon.png" type="image/gif" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>ChatPad AI</title>
+
+
+  <!-- bootstrap core css -->
+  <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- font awesome style -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- Custom styles-->
+  <link href="css/login.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
+
+</head>
+
+<body>
+   
+
+
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>ChatPad AI</span>
+          </a>
+
+    
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  ml-auto">
+            
+              
+             
+           
+              <li>
+                <a href="admin_login.html" class="btn-s">
+                  Login as Admin
+                </a>
+              </li>
+           
+              
+             
+          
+            </ul>
+  
+      </div>
+    </header>
+
+    <div class="containerx">
+        <div class="cookiesContent" id="cookiesPopup">
+   
+        
+          <p>You have successfully registered with ChatPad AI</p>
+          <button class="accept" onclick="toggle(),closeCookiePopup()">Go to Sign in</button>
+        </div>
+    </div>
+        
+
+    <!-- end header section -->
+    <div id="container" class="container">
+        <!-- FORM SECTION -->
+        <div class="row">
+        
+            <!-- SIGN UP -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-up ">
+                        <div class="input-group">
+                            <i class='bx bxs-user'></i>
+                            <input id="username" type="text" placeholder="Username" required>
+                        </div>
+                        <div class="input-group">
+                            <i class='bx bx-mail-send'></i>
+                            <input id="email" type="email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class='bx bxs-lock-alt'></i>
+                            <input id="password" type="password" placeholder="Password" required>
+                        </div>
+                        <div class="input-group">
+                            <i class='bx bxs-lock-alt'></i>
+                            <input id="confirmPassword" type="password" placeholder="Confirm password" required>
+                        </div>
+                        <button onclick="signup()">
+                            Sign up
+                        </button>
+                
+                    
+                        <p class="error-message" id="errorMessage"></p>
+                        <p>
+                            <span>
+                                Already have an account?
+                            </span>
+                            <b onclick="toggle()" class="pointer">
+                                Sign in here
+                            </b>
+                        </p>
+                    
+                    </div>
+                </div>
+              
+            </div>
+            <!-- END SIGN UP -->
+            <!-- SIGN IN -->
+            <div class="col align-items-center flex-col sign-in">
+                <div class="form-wrapper align-items-center">
+                    <div class="form sign-in">
+                        <div class="input-group">
+                            <i class='bx bxs-user'></i>
+                            <input id="signin-username" type="text" placeholder="Username">
+                        </div>
+                        <div class="input-group">
+                            <i class='bx bxs-lock-alt'></i>
+                            <input id="signin-password" type="password" placeholder="Password">
+                        </div>
+                        <!-- <a href="chat.html">chat</a> -->
+                        <button onclick="signin()">
+                            Sign in
+                        </button>
+                        <p class="error-message" id="signin-error-message"></p>
+                        <p>
+                            <span>
+                                Don't have an account?
+                            </span>
+                            <b onclick="toggle()" class="pointer">
+                                Sign up here
+                            </b>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                </div>
+            </div>
+            <!-- END SIGN IN -->
+        </div>
+        <!-- END FORM SECTION -->
+        <!-- CONTENT SECTION -->
+        <div class="row content-row">
+            <!-- SIGN IN CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="text sign-in">
+                    <h2>
+                        Welcome
+                    </h2>
+
+                </div>
+                <div class="img sign-in">
+        
+                </div>
+            </div>
+            <!-- END SIGN IN CONTENT -->
+            <!-- SIGN UP CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="img sign-up">
+                
+                </div>
+                <div class="text sign-up">
+                    <h2>
+                        Join with us
+                    </h2>
+
+                </div>
+            </div>
+            <!-- END SIGN UP CONTENT -->
+        </div>
+        <!-- END CONTENT SECTION -->
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+
+</html>
